@@ -55,8 +55,9 @@ func TestSecureCookie(t *testing.T) {
 		if err2 != nil {
 			t.Fatalf("%v: %v", err2, encoded)
 		}
+		dst["baz"] = int(dst["baz"].(float64))
 		if err := compareMaps(dst, value); err != nil {
-			t.Fatalf("Expected %v, got %v.", value, dst)
+			t.Fatalf("Expected %v, got %v.", value, dst, err)
 		}
 		dst2 := make(map[string]interface{})
 		err3 := s2.Decode("sid", encoded, &dst2)
